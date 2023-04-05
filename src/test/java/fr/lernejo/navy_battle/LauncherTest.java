@@ -1,54 +1,60 @@
 package fr.lernejo.navy_battle;
 
+import fr.lernejo.navy_battle.Launcher;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class LauncherTest {
 
-class LauncherTest {
-    @Test
-    void main_withInvalidPort_shouldPrintErrorMessage() throws IOException, InterruptedException {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setErr(new PrintStream(outContent));
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1023", "0", "-1", "65536", "9999999"})
+    public void testInvalidPortNumber(String portNumber) {
+        System.setOut(new PrintStream(output));
+        String[] args = {portNumber};
         try {
-            Launcher.main(new String[]{"123"});
+            Launcher.main(args);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        String expectedOutput = "Enter port number between 1024 and 65535:\n";
-        assertEquals(expectedOutput, outContent.toString());
+        Assertions.assertEquals("Enter port number between 1024 and 65535:\n", output.toString());
     }
 
     @Test
-    void main_withNoArgs_shouldPrintErrorMessage() throws IOException {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setErr(new PrintStream(outContent));
-
+    public void testNoArguments() {
+        System.setOut(new PrintStream(output));
+        String[] args = {};
         try {
-            Launcher.main(new String[]{});
+            Launcher.main(args);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        String expectedOutput = "No argument, program needs 1 or 2 arguments to be launched\n";
-        assertEquals(expectedOutput, outContent.toString());
+        Assertions.assertEquals("No argument, program needs 1 or 2 arguments to be launched\n", output.toString());
     }
 
     @Test
-    void main_withValidPort_shouldCreateServer() throws IOException {
-        try {
-            Launcher.main(new String[]{"8080"});
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        // Here you can add assertions to check that the server is actually created and running properly
+    public void testServerOnly() throws IOException, InterruptedException {
+        String[] args = {"5000"};
+        Launcher.main(args);
+        // Here you can add your assertions to check if the server is started correctly.
+    }
+
+    @Test
+    public void testServerAndClient() throws IOException, InterruptedException {
+        String[] args = {"5000", "http://localhost:8080"};
+        Launcher.main(args);
+        // Here you can add your assertions to check if the server and client are started correctly.
     }
 
 }
