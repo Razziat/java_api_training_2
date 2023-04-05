@@ -1,8 +1,8 @@
 package fr.lernejo.navy_battle;
 
 public class BoardCells {
-    final int x;
-    final int y;
+    final private int x;
+    final private int y;
     public BoardCells(int x , int y) {
         this.x = x;
         this.y = y;

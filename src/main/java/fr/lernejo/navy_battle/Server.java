@@ -10,10 +10,26 @@ import java.util.concurrent.Executors;
 
 
 public class Server {
-    final int port;
-    final Parser parser;
-    final Sea sea;
-    final Client client;
+    final private int port;
+    final private Parser parser;
+    final private Sea sea;
+    final private Client client;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public Parser getParser() {
+        return parser;
+    }
+
+    public Sea getSea() {
+        return sea;
+    }
 
     public Server(int portNumber) {
         port = portNumber;

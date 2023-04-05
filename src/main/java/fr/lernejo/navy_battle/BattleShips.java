@@ -3,7 +3,7 @@ package fr.lernejo.navy_battle;
 import java.util.ArrayList;
 
 public class BattleShips {
-    final ArrayList<BoardCells> positions;
+    final private ArrayList<BoardCells> positions;
 
     public BattleShips(int nb, int X, int Y) {
         positions = new ArrayList<>(nb);

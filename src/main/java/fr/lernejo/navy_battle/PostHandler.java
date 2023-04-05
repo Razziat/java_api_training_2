@@ -25,13 +25,13 @@ public class PostHandler implements HttpHandler {
     }
     @Override
     public void handle(HttpExchange exchange) {
-        JSONObject jsonRequest = server.parser.getRequest(exchange);
-        if (server.parser.isValidBody(jsonRequest)) {
-            server.response("{\"id\": \"" + server.port + "\",\"url\": \"http://localhost:" +
-                server.port + "\",\"message\": \"May the best code win\"}", exchange, 202);
+        JSONObject jsonRequest = server.getParser().getRequest(exchange);
+        if (server.getParser().isValidBody(jsonRequest)) {
+            server.response("{\"id\": \"" + server.getPort() + "\",\"url\": \"http://localhost:" +
+                server.getPort() + "\",\"message\": \"May the best code win\"}", exchange, 202);
             String adversaryUrl = jsonRequest.getString("url");
-            server.client.adversaryUrl.add(adversaryUrl);
-            server.client.createGetRequest();
+            server.getClient().getAdversaryUrl().add(adversaryUrl);
+            server.getClient().createGetRequest();
         }
         else
             server.response("Bad request", exchange, 400);

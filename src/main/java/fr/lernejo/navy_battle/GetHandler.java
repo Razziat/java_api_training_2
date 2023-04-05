@@ -28,11 +28,11 @@ public class GetHandler implements HttpHandler {
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         URI requestURI = exchange.getRequestURI();
         String boardCell = requestURI.toString().split("=")[1];
-        String results = server.sea.touchedBoardCell(boardCell).stateOfShips();
-        boolean shipsLeft = server.sea.isLeft();
+        String results = server.getSea().touchedBoardCell(boardCell).stateOfShips();
+        boolean shipsLeft = server.getSea().isLeft();
         server.response("{\"consequence\": \"" + results + "\", \"shipLeft\": " + shipsLeft + "}", exchange, 200);
         if (shipsLeft) {
-            server.client.createGetRequest();
+            server.getClient().createGetRequest();
         }
     }
 }

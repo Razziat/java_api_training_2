@@ -3,7 +3,7 @@ package fr.lernejo.navy_battle;
 import java.util.ArrayList;
 
 public class Attack {
-    final ArrayList<String> nextAttack;
+    final private ArrayList<String> nextAttack;
 
     public Attack() {
         nextAttack = initAttacks();

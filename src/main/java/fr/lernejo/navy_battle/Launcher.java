@@ -13,7 +13,7 @@ public class Launcher {
             Server newServer = new Server(portNumber);
             newServer.runServer();
             if (args.length == 2){
-                newServer.client.createPostRequest(args[1], args[0]);
+                newServer.getClient().createPostRequest(args[1], args[0]);
             }
         }
         else

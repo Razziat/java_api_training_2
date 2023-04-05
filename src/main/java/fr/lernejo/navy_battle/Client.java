@@ -7,9 +7,13 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 public class Client {
-    final HttpClient client;
-    final Attack attack;
-    final ArrayList<String> adversaryUrl;
+    final private HttpClient client;
+    final private Attack attack;
+    final private ArrayList<String> adversaryUrl;
+
+    public ArrayList<String> getAdversaryUrl() {
+        return adversaryUrl;
+    }
 
     public Client() {
         attack = new Attack();

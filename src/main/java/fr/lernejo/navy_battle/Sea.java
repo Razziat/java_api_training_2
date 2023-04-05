@@ -3,7 +3,7 @@ package fr.lernejo.navy_battle;
 import java.util.ArrayList;
 
 public class Sea {
-    final ArrayList<BattleShips> battleShips;
+    final private ArrayList<BattleShips> battleShips;
 
     public Sea() {
         battleShips = new ArrayList<BattleShips>(5);
