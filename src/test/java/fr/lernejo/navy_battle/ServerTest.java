@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import fr.lernejo.navy_battle.Server;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 
 import com.sun.net.httpserver.HttpServer;
 
