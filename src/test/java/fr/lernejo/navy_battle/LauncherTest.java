@@ -36,6 +36,30 @@ class LauncherTest {
     }
 
     @Test
+    public void testInvalidPortNumber2() throws IOException {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(outContent));
+
+        String[] args = {"-2"};
+        try {
+            Launcher.main(args);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals("Enter port number between 1024 and 65535:\n", outContent.toString());
+        outContent.reset();
+
+        String[] args2 = {"65567"};
+        try {
+            Launcher.main(args2);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals("Enter port number between 1024 and 65535:\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
     public void testNoArguments() throws IOException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(outContent));
@@ -50,7 +74,7 @@ class LauncherTest {
     }
 
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
-    
+
     @Test
     public void testServerOnly() throws IOException, InterruptedException {
         String[] args = {"5000"};
