@@ -1,6 +1,8 @@
 package fr.lernejo.navy_battle;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -46,5 +48,21 @@ class LauncherTest {
         }
         assertEquals("No argument, program needs 1 or 2 arguments to be launched\n", outContent.toString());
     }
+
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     
+    @Test
+    public void testServerOnly() throws IOException, InterruptedException {
+        String[] args = {"5000"};
+        Launcher.main(args);
+        // Here you can add your assertions to check if the server is started correctly.
+    }
+
+    @Test
+    public void testServerAndClient() throws IOException, InterruptedException {
+        String[] args = {"5000", "http://localhost:8080"};
+        Launcher.main(args);
+        // Here you can add your assertions to check if the server and client are started correctly.
+    }
+
 }
